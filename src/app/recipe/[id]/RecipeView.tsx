@@ -64,8 +64,13 @@ export default function RecipeView({ recipe }: { recipe: Recipe }) {
               ))}
             </div>
           )}
-          <div className="no-print" style={{ display: "flex", gap: 8, marginTop: 12 }}>
-            <button className="btn" onClick={() => window.print()}>Print</button>
+          <div className="no-print" style={{ display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
+            {recipe.steps.length > 0 && (
+              <Link className="btn" href={`/recipe/${encodeURIComponent(recipe.id)}/cook`}>
+                👨‍🍳 Start Cook Mode
+              </Link>
+            )}
+            <button className="btn secondary" onClick={() => window.print()}>Print</button>
             <a className="btn secondary" href={recipe.sourceUrl} target="_blank" rel="noreferrer">
               Original source
             </a>
@@ -114,7 +119,7 @@ export default function RecipeView({ recipe }: { recipe: Recipe }) {
         ) : (
           <p className="notice">No step-by-step instructions available for this recipe.</p>
         )}
-        {/* Cook Mode (Build-out folder 04) lands in a later milestone. */}
+        {/* Cook Mode (Build-out folder 04) is launched from the button up top. */}
       </div>
     </div>
   );
